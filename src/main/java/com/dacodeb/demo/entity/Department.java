@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Department {
@@ -11,6 +12,8 @@ public class Department {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long DepartmentId ;
+	
+	@NotBlank(message = "Pls Add Department name")
 	private String DepartmentName ;
 	private String DepartmentAddress ;
 	private String DepartmentCode ;
@@ -50,6 +53,9 @@ public class Department {
 	@Override
 	public String toString() {
 		return "Department [DepartmentName=" + DepartmentName + ", DepartmentAddress=" + DepartmentAddress + "]";
+	}
+	public Department() {
+		super();
 	}
 	
 	
