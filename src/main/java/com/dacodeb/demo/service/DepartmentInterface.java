@@ -5,6 +5,7 @@ import java.util.Optional;
 
 //import com.dacodeb.demo.controller.List;
 import com.dacodeb.demo.entity.Department;
+import com.dacodeb.demo.error.DepartmentNotFoundException;
 
 public interface DepartmentInterface {
 
@@ -12,6 +13,6 @@ public interface DepartmentInterface {
 
 	public List<Department> fetchDepartmentList();
 
-	public Department  getDepartmentByID(Long departmentId);
+	public Department  getDepartmentByID(Long departmentId) throws DepartmentNotFoundException;
 	
 }

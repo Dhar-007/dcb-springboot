@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dacodeb.demo.entity.Department;
+import com.dacodeb.demo.error.DepartmentNotFoundException;
 import com.dacodeb.demo.service.DepartmentInterface;
 
 import jakarta.validation.Valid;
@@ -38,7 +39,7 @@ public class DepartmentController {
 	}
 	
 	@GetMapping("/departments/{id}")
-	public Department getDepartmentByID(@PathVariable("id") Long departmentId) {
+	public Department getDepartmentByID(@PathVariable("id") Long departmentId) throws DepartmentNotFoundException {
 		return service.getDepartmentByID(departmentId);
 	}
 

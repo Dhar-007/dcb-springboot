@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dacodeb.demo.entity.Department;
+import com.dacodeb.demo.error.DepartmentNotFoundException;
 import com.dacodeb.demo.repository.DepartmentRepo;
 
 import jakarta.transaction.Transactional;
@@ -35,16 +36,21 @@ public class DepartmentServiceImpl implements DepartmentInterface {
 	}
 
 	@Override
-	public Department getDepartmentByID(Long departmentId) {
+	public Department getDepartmentByID(Long departmentId) throws DepartmentNotFoundException {
 		// TODO Auto-generated method stub
         //Optional<Department> dept = Optional.ofNullable(repo.getReferenceById(departmentId));
 		//System.out.println(dept.get());
         //Department de = dept.get();
         //Hibernate.initialize(de); 
 		//return de;
-		Department department = repo.findById(departmentId).orElseThrow(() -> new RuntimeException("User not found!!"));
+		Optional<Department> department = repo.findById(departmentId);
+		
+		if (!department.isPresent()) {
+			throw new DepartmentNotFoundException("Department not found!");
+		}
+		
         //Hibernate.initialize(department);  // Initialize the proxy
-        return department;
+        return department.get();
 	}
 	
 
